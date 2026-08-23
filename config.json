@@ -1,0 +1,18 @@
+{
+  "name": "Musaib Sayyed",
+  "title": "DevOps & Cloud Engineer",
+  "location": "India",
+  "bio": "Building automated CI/CD pipelines, containerized environments, and cloud infrastructure.",
+  "skills": ["Docker", "GitHub Actions", "Linux (Ubuntu)", "Node.js", "Git", "Nginx"],
+  "projects": [
+    {
+      "name": "Dynamic Portfolio & Resume API",
+      "tech": "Docker, Express, GitHub Actions",
+      "description": "Containerized portfolio generator that renders minimal Web UI and REST API from JSON configuration."
+    }
+  ],
+  "links": {
+    "github": "https://github.com/sayyedmusaib91-code",
+    "linkedin": "https://linkedin.com"
+  }
+}
