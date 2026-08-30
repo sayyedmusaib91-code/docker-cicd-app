@@ -77,4 +77,3 @@ Instead of relying on conventional static hosting platforms, this application is
 * **Portfolio:** https://musaib-portfolio.duckdns.org  
 * **GitHub:** https://github.com/sayyedmusaib91-code  
 * **LinkedIn:** https://www.linkedin.com/in/musaib-sayyed
-*
