@@ -11,8 +11,6 @@ An enterprise-ready, containerized developer portfolio engineered with modern we
 This project serves as both a central technical showcase and a live proof-of-concept for modern Cloud & DevOps engineering practices. 
 
 Instead of relying on conventional static hosting platforms, this application is fully containerized using Docker, validated through automated GitHub Actions workflows, and deployed onto an AWS production environment with hardened reverse proxy security and automated certificate lifecycle management.
-<img width="1833" height="891" alt="image" src="https://github.com/user-attachments/assets/434969b0-2593-460e-b8db-3615ec82a4a5" />
-<img width="1833" height="891" alt="image" src="https://github.com/user-attachments/assets/f86a9469-c9ee-4e85-8913-2243e273c46e" />
 
 ---
 
