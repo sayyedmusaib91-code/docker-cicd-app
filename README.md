@@ -7,7 +7,7 @@ An enterprise-ready, containerized developer portfolio engineered with modern we
 
 ## 🌟 Overview
 
-This project serves as both a central technical showcase and a live proof-of-concept for modern Cloud & DevOps engineering practices. 
+This project serves as both a central technical showcase and a live proof-of-concept for modern Cloud & DevOps engineering practices.
 
 Instead of relying on conventional static hosting platforms, this application is fully containerized using Docker, validated through automated GitHub Actions workflows, and deployed onto an AWS production environment with hardened reverse proxy security and automated certificate lifecycle management.
 
