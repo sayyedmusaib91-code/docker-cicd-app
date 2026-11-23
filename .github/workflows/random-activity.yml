@@ -1,0 +1,56 @@
+name: Random 3-5 Days Activity
+
+on:
+  schedule:
+    # Daily 14:30 UTC = 8:00 PM IST check karta hai
+    - cron: '30 14 * * *'
+  workflow_dispatch:
+
+jobs:
+  random-log:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check random 3-5 day interval
+        id: check
+        run: |
+          mkdir -p logs
+          TODAY_EPOCH=$(date -u +%s)
+          TARGET_FILE="logs/next-run-epoch.txt"
+
+          if [ ! -f "$TARGET_FILE" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            GAP_DAYS=$(( (RANDOM % 3) + 3 )) # 3, 4, ya 5 days
+            NEXT_EPOCH=$(( TODAY_EPOCH + GAP_DAYS * 86400 ))
+            echo "$NEXT_EPOCH" > "$TARGET_FILE"
+            echo "should_commit=true" >> "$GITHUB_OUTPUT"
+            echo "Committed now. Next run in $GAP_DAYS days."
+          else
+            NEXT_EPOCH=$(cat "$TARGET_FILE")
+            if [ "$TODAY_EPOCH" -ge "$NEXT_EPOCH" ]; then
+              GAP_DAYS=$(( (RANDOM % 3) + 3 )) # 3, 4, ya 5 days
+              NEW_NEXT_EPOCH=$(( TODAY_EPOCH + GAP_DAYS * 86400 ))
+              echo "$NEW_NEXT_EPOCH" > "$TARGET_FILE"
+              echo "should_commit=true" >> "$GITHUB_OUTPUT"
+              echo "Interval reached. Committed now; next in $GAP_DAYS days."
+            else
+              echo "should_commit=false" >> "$GITHUB_OUTPUT"
+              echo "Skipping today. Waiting for scheduled 3-5 day window."
+            fi
+          fi
+
+      - name: Append log and commit as user
+        if: steps.check.outputs.should_commit == 'true'
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: |
+          echo "Random interval activity on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/random-activity.txt
+          git config user.name "Musaib Sayyed"
+          git config user.email "sayyedmusaib91@gmail.com"
+          git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
+          git add logs/random-activity.txt logs/next-run-epoch.txt
+          git commit -m "Random 3-5 day activity log" || exit 0
+          git push
