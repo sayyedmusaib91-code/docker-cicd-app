@@ -2,7 +2,6 @@
 
 An enterprise-ready, containerized developer portfolio engineered with modern web standards, automated CI/CD deployment pipelines, and hosted on a dedicated AWS EC2 Linux instance fronted by Nginx with automated SSL/TLS encryption.
 
-* **Live Demo:** https://musaib-portfolio.duckdns.org
 
 ---
 
