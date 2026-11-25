@@ -2,7 +2,8 @@ name: Daily Activity Update
 
 on:
   schedule:
-    - cron: '30 13 * * *' # 13:30 UTC = 7:00 PM IST daily
+    # 18:36 UTC = 12:06 AM IST daily
+    - cron: '36 18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -12,7 +13,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Append daily log
         run: |
@@ -23,8 +24,8 @@ jobs:
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config user.name "Musaib Sayyed"
-          git config user.email "sayyedmusaib91@gmail.com"
+          git config user.name "sayyedmusaib91-code"
+          git config user.email "286221917+sayyedmusaib91-code@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
           git add logs/activity.txt
           git commit -m "Daily activity log" || exit 0
