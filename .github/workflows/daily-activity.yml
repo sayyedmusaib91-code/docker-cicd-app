@@ -2,8 +2,8 @@ name: Daily Activity Update
 
 on:
   schedule:
-    # 18:36 UTC = 12:06 AM IST daily
-    - cron: '36 18 * * *'
+    # 18:40 UTC = 12:10 AM IST daily
+    - cron: '40 18 * * *'
   workflow_dispatch:
 
 jobs:
