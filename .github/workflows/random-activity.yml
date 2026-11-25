@@ -2,8 +2,8 @@ name: Random 3-5 Days Activity
 
 on:
   schedule:
-    # Daily 14:30 UTC = 8:00 PM IST check karta hai
-    - cron: '30 14 * * *'
+    # Roz 12:10 AM IST (18:40 UTC) par 3-5 day gap check karta hai
+    - cron: '40 18 * * *'
   workflow_dispatch:
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Check random 3-5 day interval
         id: check
@@ -48,8 +48,8 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           echo "Random interval activity on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/random-activity.txt
-          git config user.name "Musaib Sayyed"
-          git config user.email "sayyedmusaib91@gmail.com"
+          git config user.name "sayyedmusaib91-code"
+          git config user.email "286221917+sayyedmusaib91-code@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
           git add logs/random-activity.txt logs/next-run-epoch.txt
           git commit -m "Random 3-5 day activity log" || exit 0
