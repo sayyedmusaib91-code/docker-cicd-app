@@ -22,7 +22,7 @@ Instead of relying on conventional static hosting platforms, this application is
 * **Transport Layer Security (SSL/TLS):** Enforced end-to-end HTTPS encryption utilizing Let's Encrypt certificates orchestrated by Certbot with background renewal automation.
 * **Modern UI/UX Experience:** Clean, cyber-aesthetic developer interface featuring interactive project cards, live status telemetry, and responsive layout across desktop and mobile devices.
 
----
+----
 
 ## 🛠️ Technology Stack
 
