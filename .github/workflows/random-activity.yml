@@ -42,15 +42,22 @@ jobs:
             fi
           fi
 
-      - name: Append log and commit as user
+      - name: Push 2 random interval commits
         if: steps.check.outputs.should_commit == 'true'
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          echo "Random interval activity on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/random-activity.txt
           git config user.name "sayyedmusaib91-code"
           git config user.email "286221917+sayyedmusaib91-code@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
-          git add logs/random-activity.txt logs/next-run-epoch.txt
-          git commit -m "Random 3-5 day activity log" || exit 0
+
+          echo "Random commit #1 on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/random-1.txt
+          git add logs/random-1.txt logs/next-run-epoch.txt
+          git commit -m "Random 3-5 day activity log #1" || exit 0
+          git push
+
+          git pull --rebase origin main
+          echo "Random commit #2 on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/random-2.txt
+          git add logs/random-2.txt
+          git commit -m "Random 3-5 day activity log #2" || exit 0
           git push
