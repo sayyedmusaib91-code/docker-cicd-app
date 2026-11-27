@@ -15,18 +15,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
 
-      - name: Append daily log
-        run: |
-          mkdir -p logs
-          echo "Activity on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/activity.txt
-
-      - name: Commit and push as user
+      - name: Configure git and push 2 daily commits
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
+          mkdir -p logs
           git config user.name "sayyedmusaib91-code"
           git config user.email "286221917+sayyedmusaib91-code@users.noreply.github.com"
           git remote set-url origin "https://x-access-token:${GH_PAT}@github.com/${GITHUB_REPOSITORY}.git"
-          git add logs/activity.txt
-          git commit -m "Daily activity log" || exit 0
+
+          echo "Daily commit #1 on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/daily-1.txt
+          git add logs/daily-1.txt
+          git commit -m "Daily activity log #1" || exit 0
+          git push
+
+          git pull --rebase origin main
+          echo "Daily commit #2 on $(date -u '+%Y-%m-%d %H:%M:%S UTC')" >> logs/daily-2.txt
+          git add logs/daily-2.txt
+          git commit -m "Daily activity log #2" || exit 0
           git push
